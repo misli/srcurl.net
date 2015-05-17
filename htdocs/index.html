@@ -4,26 +4,24 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
         <script type="text/javascript">
 
-function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
-}
-
 function splitFilename(str) {
-    if (endsWith(str, ".zip"))
-        return [str.substr(0, str.length - 4), str.substr(str.length - 4)];
-    else if (endsWith(str, ".tar.gz"))
-        return [str.substr(0, str.length - 7), str.substr(str.length - 7)];
-    else if (endsWith(str, ".tar.bz2"))
-        return [str.substr(0, str.length - 8), str.substr(str.length - 8)];
-    else
-        return [str, ""]
+    lastDot = str.lastIndexOf(".");
+    if (lastDot > 0) {
+        secondToLastDot = str.lastIndexOf(".", lastDot - 1);
+        if (str.substr(secondToLastDot, 4) == ".tar")
+            return [str.substr(0, secondToLastDot), str.substr(secondToLastDot)];
+        else
+            return [str.substr(0, lastDot), str.substr(lastDot)];
+    } else {
+        return [str, ""];
+    }
 }
 
 function convertUrl(origUrl) {
-    var splitUrl = origUrl.split("/")
-    var site = splitUrl[2].split(".", 1)
-    var filename = splitFilename(splitUrl[6])
-    return "http://" + site + ".srcurl.net/" + splitUrl[3] + "/" + splitUrl[4] + "/" + filename[0] + "/" + splitUrl[4] + "-" + filename[0] + filename[1]
+    var splitUrl = origUrl.split("/");
+    var site = splitUrl[2].split(".", 1);
+    var filename = splitFilename(splitUrl[6]);
+    return "http://" + site + ".srcurl.net/" + splitUrl[3] + "/" + splitUrl[4] + "/" + filename[0] + "/" + splitUrl[4] + "-" + filename[0] + filename[1];
 }
 
 function processForm() {
