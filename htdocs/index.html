@@ -21,7 +21,7 @@ function convertUrl(origUrl) {
     var splitUrl = origUrl.split("/");
     var site = splitUrl[2].split(".", 1);
     var filename = splitFilename(splitUrl[6]);
-    return "http://" + site + ".srcurl.net/" + splitUrl[3] + "/" + splitUrl[4] + "/" + filename[0] + "/" + splitUrl[4] + "-" + filename[0] + filename[1];
+    return "https://" + site + ".srcurl.net/" + splitUrl[3] + "/" + splitUrl[4] + "/" + filename[0] + "/" + splitUrl[4] + "-" + filename[0] + filename[1];
 }
 
 function processForm() {
