@@ -1,0 +1,5 @@
+#!/bin/bash
+
+letsencrypt certonly --webroot -w /data/srcurl.net/htdocs -d srcurl.net -d www.srcurl.net
+letsencrypt certonly --webroot -w /data/srcurl.net/htdocs -d github.srcurl.net
+letsencrypt certonly --webroot -w /data/srcurl.net/htdocs -d bitbucket.srcurl.net
